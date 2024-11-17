@@ -26,7 +26,7 @@ class Attention(nn.Module):
         self.c_proj = nn.Linear(config.n_embd, config.n_embd, bias=config.bias)
         self.attn_dropout = nn.Dropout(config.dropout)
         self.resid_dropout = nn.Dropout(config.dropout)
-        self.n_head = config.n_head
+        self.n_head = config.n_head # n_heads = 8
         self.n_embd = config.n_embd
         self.dropout = config.dropout
         self.model_type = config.model_type
@@ -57,7 +57,7 @@ class Attention(nn.Module):
             #                                                                   dropout_p=self.dropout if self.training else 0,
             #                                                                   is_causal=True)
             #     qkv.append(cross_attention)
-            
+
             # for 2_layer reflex attention: 1) 5+2+1; 
             q_sa, k_sa, v_sa = q[:, :5, :, :], k[:, :5, :, :], v[:, :5, :, :]
             self_attention = torch.nn.functional.scaled_dot_product_attention(q_sa, k_sa, v_sa, attn_mask=None,
@@ -74,7 +74,7 @@ class Attention(nn.Module):
                                                                           dropout_p=self.dropout if self.training else 0,
                                                                           is_causal=True)
 
-            # # for 2_layer reflex attention: 1) 3+3+2; 
+            # # for 2_layer reflex attention: 2) 3+3+2; 
             # q_sa, k_sa, v_sa = q[:, :3, :, :], k[:, :3, :, :], v[:, :3, :, :]
             # self_attention = torch.nn.functional.scaled_dot_product_attention(q_sa, k_sa, v_sa, attn_mask=None,
             #                                                                 dropout_p=self.dropout if self.training else 0,
@@ -186,13 +186,13 @@ class GPT(nn.Module):
         x = self.transformer.drop(tok_emb + pos_emb)
         prevs = []
 
-        # all layers
+        # # all layers attention
         # for i, block in enumerate(self.transformer.h):
         #     x, prev = block(x, prevs)
         #     if self.config.model_type == 'reflex':
         #         prevs.append(prev)
 
-        # only 2 previous layers
+        # only 2 previous layer attention
         for i, block in enumerate(self.transformer.h):
             x, prev = block(x, prevs)
             if self.config.model_type == 'reflex':
