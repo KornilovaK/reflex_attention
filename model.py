@@ -39,7 +39,7 @@ class Attention(nn.Module):
         B, T, C = x.size() # batch size, sequence length, embedding dimensionality (n_embd)
 
         q, k, v  = self.c_attn(x).split(self.n_embd, dim=2)
-        # q, k, v = self.query(x), self.key(x), self.value(x)
+        # q, k, v = self.query(x), self.key(x), self.value(x) # muuuuuuuuuch worse and requires much more time and memory
         k = k.view(B, T, self.n_head, C // self.n_head).transpose(1, 2) # (B, nh, T, hs)
         q = q.view(B, T, self.n_head, C // self.n_head).transpose(1, 2) # (B, nh, T, hs)
         v = v.view(B, T, self.n_head, C // self.n_head).transpose(1, 2) # (B, nh, T, hs)
