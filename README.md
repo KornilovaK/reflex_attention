@@ -38,7 +38,7 @@ I didn't totally completed any training 'cause, for example, the last model need
 <img src="charts/train-val reflex 1024 512-768.png" /> <img src="charts/mfu reflex 1024 512-768.png" />
 
 4) n_embed = 768, block_size = 1024, dropout = 0.0. 4-2-2 Reflex 4-2-2 VS 5-2-1 VS all-layer VS original attention
-<img src="charts/train-val orig reflex 2-all layer.png" /> <img src="charts/mful orig reflex 2-all layer.png" /> 
+<img src="charts/train-val orig reflex 2-all layer.png" /> <img src="charts/mfu orig reflex 2-all layer.png" /> 
 Trained during 7250 models:
     * [Original attention](https://huggingface.co/Eka-Korn/original_gpt) 
     * [5-2-1 Reflex attention](https://huggingface.co/Eka-Korn/reflex-attention_5-2-1_GPT)
