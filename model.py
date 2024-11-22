@@ -23,10 +23,7 @@ class Attention(nn.Module):
         super().__init__()
         assert config.n_embd % config.n_head == 0
         self.c_attn = nn.Linear(config.n_embd, 3 * config.n_embd, bias=config.bias)
-        # self.query = nn.Linear(config.n_embd, config.n_embd, bias=config.bias)
-        # self.key = nn.Linear(config.n_embd, config.n_embd, bias=config.bias)
-        # self.value = nn.Linear(config.n_embd, config.n_embd, bias=config.bias)
-
+        
         self.c_proj = nn.Linear(config.n_embd, config.n_embd, bias=config.bias)
         self.attn_dropout = nn.Dropout(config.dropout)
         self.resid_dropout = nn.Dropout(config.dropout)
@@ -39,7 +36,6 @@ class Attention(nn.Module):
         B, T, C = x.size() # batch size, sequence length, embedding dimensionality (n_embd)
 
         q, k, v  = self.c_attn(x).split(self.n_embd, dim=2)
-        # q, k, v = self.query(x), self.key(x), self.value(x) # muuuuuuuuuch worse and requires much more time and memory
         k = k.view(B, T, self.n_head, C // self.n_head).transpose(1, 2) # (B, nh, T, hs)
         q = q.view(B, T, self.n_head, C // self.n_head).transpose(1, 2) # (B, nh, T, hs)
         v = v.view(B, T, self.n_head, C // self.n_head).transpose(1, 2) # (B, nh, T, hs)
