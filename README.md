@@ -40,9 +40,9 @@ I didn't totally completed any training 'cause, for example, the last model need
 4) n_embed = 768, block_size = 1024, dropout = 0.0. 4-2-2 Reflex 4-2-2 VS 5-2-1 VS all-layer VS original attention
 <img src="charts/train-val orig reflex 2-all layer.png" /> <img src="charts/mfu orig reflex 2-all layer.png" /> 
 Trained during 7250 models:
-    * [Original attention](https://huggingface.co/Eka-Korn/original_gpt) 
-    * [5-2-1 Reflex attention](https://huggingface.co/Eka-Korn/reflex-attention_5-2-1_GPT)
-    * [all layer Reflex attention](https://huggingface.co/Eka-Korn/reflex-attention_all-layers_GPT)
+    * *Original attention*
+    * *5-2-1 Reflex attention*
+    * *all layer Reflex attention*
 
 5) n_embed = 768, block_size = 1024, dropout = 0.1 (there's no reason to use it as we can't overfit here)
 <img src="charts/val with dropout.jpg" /> 
